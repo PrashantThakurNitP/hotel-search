@@ -3,7 +3,6 @@ package com.hotelbooking.search_service.service;
 import com.hotelbooking.common.event.HotelEvent;
 import com.hotelbooking.common.event.RoomEvent;
 import com.hotelbooking.search_service.entity.HotelSearchDocument;
-import com.hotelbooking.search_service.mapper.HotelDocumentMapper;
 import com.hotelbooking.search_service.repository.HotelSearchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

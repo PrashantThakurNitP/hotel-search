@@ -1,4 +1,4 @@
-package com.hotelbooking.search_service;
+package com.hotelbooking.search_service.controller;
 
 
 import com.hotelbooking.search_service.entity.HotelSearchDocument;
@@ -15,10 +15,6 @@ import java.util.List;
 public class controller {
     private final HotelIndexService hotelIndexService;
 
-    /**
-     * Search hotels by city name.
-     * Example: GET /api/search?city=Goa
-     */
     @GetMapping("/api/search")
     public List<HotelSearchDocument> searchByCity(@RequestParam String city) {
         return hotelIndexService.searchByCity(city);
