@@ -3,9 +3,12 @@ package com.hotelbooking.search_service.service;
 import com.hotelbooking.common.event.HotelEvent;
 import com.hotelbooking.common.event.RoomEvent;
 import com.hotelbooking.search_service.entity.HotelSearchDocument;
+import com.hotelbooking.search_service.entity.HotelSearchFilter;
 import com.hotelbooking.search_service.repository.HotelSearchRepository;
+import com.hotelbooking.search_service.repository.HotelSearchRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class HotelIndexService {
 
-    private final HotelSearchRepository hotelSearchRepository;
+
+    private  final HotelSearchRepository hotelSearchRepository;
+
+    private  final HotelSearchRepositoryImpl hotelCustomSearchRepository;
 
    public HotelSearchDocument saveOrUpdateHotel(HotelSearchDocument hotelSearchDocument){
        return hotelSearchRepository.save(hotelSearchDocument);
@@ -25,6 +31,10 @@ public class HotelIndexService {
     public List<HotelSearchDocument> searchByCity(String city){
        return hotelSearchRepository.findByCity(city);
     }
+    public List<HotelSearchDocument> search(HotelSearchFilter hotelSearchFilter) {
+        return hotelCustomSearchRepository.searchByCityNameAndMinRating(hotelSearchFilter);
+   }
+
 
 
     public void indexHotel(HotelEvent hotelEvent) {
@@ -61,9 +71,6 @@ public class HotelIndexService {
 
         hotelSearchRepository.save(doc);
     }
-
-
-
 
 
 }
