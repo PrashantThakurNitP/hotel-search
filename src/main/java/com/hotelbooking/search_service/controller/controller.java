@@ -4,6 +4,7 @@ package com.hotelbooking.search_service.controller;
 import com.hotelbooking.search_service.entity.HotelSearchDocument;
 import com.hotelbooking.search_service.entity.HotelSearchFilter;
 import com.hotelbooking.search_service.service.HotelIndexService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class controller {
         return hotelIndexService.searchByCity(city);
     }
     @PostMapping()
-    public ResponseEntity<List<HotelSearchDocument>> searchHotels(@RequestBody HotelSearchFilter filter) {
+    public ResponseEntity<List<HotelSearchDocument>> searchHotels(@Valid @RequestBody HotelSearchFilter filter) {
         return ResponseEntity.ok(hotelIndexService.search(filter));
     }
 }
