@@ -4,6 +4,8 @@ package com.hotelbooking.search_service.repository;
 import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery;
+import co.elastic.clients.json.JsonData;
 import com.hotelbooking.search_service.entity.HotelSearchDocument;
 import com.hotelbooking.search_service.entity.HotelSearchFilter;
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate;
@@ -42,6 +44,13 @@ public class HotelSearchRepositoryImpl implements HotelSearchCustomRepository {
                     .query(hotelSearchFilter.getName())
             )._toQuery();
             boolQueryBuilder.must(nameQuery);
+        }
+        if (hotelSearchFilter.getMinRating() != null && hotelSearchFilter.getMinRating() > 0) {
+            Query ratingQuery = RangeQuery.of(r -> r
+                    .field("rating")
+                    .gte(JsonData.of(hotelSearchFilter.getMinRating()))
+            )._toQuery();
+            boolQueryBuilder.filter(ratingQuery);
         }
 
 

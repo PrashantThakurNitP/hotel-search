@@ -22,6 +22,7 @@ public class HotelSearchDocument{
 
     private String name;
     private String city;
+    private Double rating;
     private List<Room> rooms;
 
     @Data

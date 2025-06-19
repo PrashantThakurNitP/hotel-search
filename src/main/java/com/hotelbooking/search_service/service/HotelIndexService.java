@@ -7,6 +7,7 @@ import com.hotelbooking.search_service.entity.HotelSearchFilter;
 import com.hotelbooking.search_service.repository.HotelSearchRepository;
 import com.hotelbooking.search_service.repository.HotelSearchRepositoryImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
@@ -17,6 +18,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class HotelIndexService {
 
 
@@ -38,6 +40,7 @@ public class HotelIndexService {
 
 
     public void indexHotel(HotelEvent hotelEvent) {
+       log.info("Indexing hotel {} on Elastic search", hotelEvent.getHotelId());
         UUID hotelId = hotelEvent.getHotelId();
         Optional<HotelSearchDocument> existing = hotelSearchRepository.findById(hotelId);
 
@@ -45,10 +48,12 @@ public class HotelIndexService {
         doc.setHotelId(hotelId);
         doc.setName(hotelEvent.getName());
         doc.setCity(hotelEvent.getCity());
+        doc.setRating(hotelEvent.getRating());
 
         hotelSearchRepository.save(doc);
     }
     public void indexRoom(RoomEvent roomEvent) {
+        log.info("Indexing room {} on Elastic search", roomEvent.getHotelId());
 
         UUID hotelId = roomEvent.getHotelId();
         Optional<HotelSearchDocument> existing = hotelSearchRepository.findById(hotelId);

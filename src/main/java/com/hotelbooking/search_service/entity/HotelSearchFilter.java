@@ -7,5 +7,6 @@ import lombok.Data;
 public class HotelSearchFilter {
     private String city;
     private String name;
+    private Double minRating;
 
 }
