@@ -39,5 +39,15 @@ This microservice provides hotel search functionality using **Elasticsearch** an
 
 - **Method:** `GET`
 - **Endpoint:** `/v1/search?city={city}`
-- **Description:** Returns hotels available in the specified city.
+- **Description:** `Returns hotels available in the specified city.`
+
+### 2. 🧾 Search Hotels with Filters
+
+- **Method:** `POST`
+
+- **Endpoint:** `/v1/search`
+
+- **Content-Type:** `application/json`
+
+- **Description:** `Filters hotels by city, name, and minimum rating.`
 
